@@ -3,6 +3,7 @@ from flask.cli import with_appcontext, AppGroup
 
 from App.database import db, get_migrate
 
+#this is a test comment 
 
 from App.models.user import *
 from App.models.student import *
