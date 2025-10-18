@@ -16,7 +16,7 @@ class Student(User):
         super().__init__(username, password, role='student')
 
     def __repr__(self):
-        return f"<Student {self.id} - {self.username} | Hours: {self.total_confirmed_hours}>"
+        return f"<Student {self.id} - {self.username} | Hours: {self.total_hours}>"
 
 
 

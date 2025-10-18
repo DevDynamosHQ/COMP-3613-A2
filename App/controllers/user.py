@@ -27,6 +27,21 @@ def list_users(type):
         return Staff.query.all()
     else:
         return User.query.all()
+    
+
+
+def get_leaderboard():
+    students = Student.query.order_by(Student.total_hours.desc()).all()
+    table = []
+    previous_hours = None
+    rank = 0
+
+    for student in students:
+        if student.total_hours != previous_hours:
+            rank += 1
+            previous_hours = student.total_hours
+        table.append([rank, student.username, student.total_hours])
+    return table
 
 
    

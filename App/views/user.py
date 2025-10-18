@@ -7,10 +7,19 @@ from App.controllers import (
     create_user,
     get_all_users,
     get_all_users_json,
+    get_leaderboard,
     jwt_required
 )
 
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
+
+
+@user_views.route('/leaderboard', methods=['GET'])
+def leaderboard_page():
+    leaderboard = get_leaderboard()
+    return jsonify(leaderboard), 200
+
+
 
 @user_views.route('/users', methods=['GET'])
 def get_user_page():
