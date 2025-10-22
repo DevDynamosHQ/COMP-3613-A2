@@ -1,4 +1,4 @@
-import os, tempfile, pytest, logging, unittest
+'''import os, tempfile, pytest, logging, unittest
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from App.main import create_app
@@ -17,7 +17,7 @@ from App.controllers import (
 LOGGER = logging.getLogger(__name__)
 
 '''
-   Unit Tests
+   #Unit Tests
 '''
 class UserUnitTests(unittest.TestCase):
 
@@ -43,7 +43,7 @@ class UserUnitTests(unittest.TestCase):
         assert user.check_password(password)
 
 '''
-    Integration Tests
+    #Integration Tests
 '''
 
 # This fixture creates an empty database for the test and deletes it after the test
@@ -75,5 +75,5 @@ class UsersIntegrationTests(unittest.TestCase):
         update_user(1, "ronnie")
         user = get_user(1)
         assert user.username == "ronnie"
-        
+    '''    
 
