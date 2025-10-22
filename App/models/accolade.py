@@ -15,7 +15,15 @@ class Accolade(db.Model):
     def __repr__(self):
         return f"<Accolade {self.milestone} Hours for Student ID {self.student_id}>"
 
-
+    def get_json(self):
+        return {
+            'id': self.id,
+            'student_id': self.student_id,
+            'milestone': self.milestone,
+            'awarded_at': self.format_awarded_time(),
+            'milestone_name': self.milestone_name()
+        }
+    
     def format_awarded_time(self):
         if self.awarded_at:
             return self.awarded_at.strftime("%Y-%m-%d %H:%M")

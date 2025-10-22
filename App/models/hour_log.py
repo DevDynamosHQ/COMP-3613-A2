@@ -20,7 +20,17 @@ class HourLog(db.Model):
     def __repr__(self):
         return f"<HourLog {self.id} - Student {self.student_id} - Hours {self.hours} - Status {self.status}>"
 
-
+    def get_json(self):
+        return {
+            'id': self.id,
+            'student_id': self.student_id,
+            'staff_id': self.staff_id,
+            'hours': self.hours,
+            'status': self.status,
+            'created_at': self.format_created_time(),
+            'reviewed_at': self.format_reviewed_time()
+        }
+    
     def format_created_time(self):
         if self.created_at:
             return self.created_at.strftime("%Y-%m-%d %H:%M")
@@ -30,3 +40,4 @@ class HourLog(db.Model):
         if self.reviewed_at:
             return self.reviewed_at.strftime("%Y-%m-%d %H:%M")
         return "Not reviewed yet"
+

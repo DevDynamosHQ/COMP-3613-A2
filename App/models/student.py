@@ -18,6 +18,11 @@ class Student(User):
     def __repr__(self):
         return f"<Student {self.id} - {self.username} | Hours: {self.total_hours}>"
 
-
+    def get_json(self):
+        return{
+            'id': self.id,
+            'username': self.username,
+            'role': self.role
+        }
 
 
