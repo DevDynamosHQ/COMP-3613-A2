@@ -34,7 +34,7 @@ class UserUnitTests(unittest.TestCase):
     def test_hashed_password(self):
         password = "mypass"
         hashed = generate_password_hash(password, method='pbkdf2:sha256')
-        user = User("bob", password, role)
+        user = User("bob", password, role= "student")
         assert user.password != password
 
     def test_check_password(self):
