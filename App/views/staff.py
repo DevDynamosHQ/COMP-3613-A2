@@ -20,7 +20,7 @@ def pending_logs():
         'student_id': log.student_id,
         'hours': log.hours,
         'status': log.status,
-        "created_at": log.format_created_time()
+        'created_at': log.format_created_time()
     } for log in logs]), 200
 
 

@@ -30,7 +30,11 @@ def student_logs():
     return jsonify([{
         'id': log.id,
         'hours': log.hours,
-        'status': log.status
+        'status': log.status,
+        'confirmed_by' :log.staff.username,
+        'created_at' : log.format_created_time(),
+        'reviewed_at': log.format_reviwed_time()
+
     } for log in logs]), 200
 
 
