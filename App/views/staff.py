@@ -17,7 +17,7 @@ def pending_logs():
    
     return jsonify([{
         'id': log.id,
-        'student_id': log.student_id,
+        'student': log.student.username,
         'hours': log.hours,
         'status': log.status,
         'created_at': log.format_created_time()
@@ -52,7 +52,8 @@ def log_hours():
             'student_name': log.student.username,
             'hours': log.hours,
             'status': log.status,
-            "reviewed_at": log.format_reviewed_time()
+            "reviewed_at": log.format_reviewed_time(),
+            'reviewed_by': current_user['username']
         }
     }), 201
 

@@ -16,7 +16,7 @@ def request_student_hours():
 
     if not log:
         return jsonify(message="Failed to request hours"), 400
-    return jsonify(message=f"Requested {data['hours']} hours successfully"), 201
+    return jsonify(message=f"Student {current_user ['id']}requested {data['hours']} hours successfully"), 201
 
 
 @student_views.route('/student/logs', methods=['GET'])
@@ -27,11 +27,21 @@ def student_logs():
         return jsonify(message="Only students can view their logs"), 403
     
     logs = get_student_logs(current_user['id'])
+
+    if not logs:
+        return jsonify(message="No logs found"), 404
+    
+    for log in logs:
+        if log.staff:
+            staff_name = log.staff.username
+        else:
+            staff_name = "pending"
+
     return jsonify([{
         'id': log.id,
         'hours': log.hours,
         'status': log.status,
-        'confirmed_by' :log.staff.username,
+        'confirmed_by' :staff_name,
         'created_at' : log.format_created_time(),
         'reviewed_at': log.format_reviwed_time()
 

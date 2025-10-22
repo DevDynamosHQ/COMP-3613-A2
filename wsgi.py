@@ -79,13 +79,13 @@ def list_user_command(type):
 """---------------- User Commands ----------------"""
 # Commands that can be used by all users
 
-user_cli = AppGroup('user', help='Commands available to all users.') 
+#user_cli = AppGroup('user', help='Commands available to all users.') 
 
 
 # Command to view the student leaderboard
 # flask user leaderboard
 
-@user_cli.command("leaderboard", help="View student leaderboard ranked by total confirmed hours logged.")
+@app.cli.command("leaderboard", help="View student leaderboard ranked by total confirmed hours logged.")
 def leaderboard_command():
     leaderboard = get_leaderboard()
 
@@ -95,20 +95,20 @@ def leaderboard_command():
     else:
         print("No students found!")
 
-app.cli.add_command(user_cli)
+#app.cli.add_command(user_cli)
 
 
 
 """ ----------------- Student Commands ----------------- """
 # Commands that can be used by students only
 
-student_cli = AppGroup('student', help='Commands available to students only.')
+#student_cli = AppGroup('student', help='Commands available to students only.')
 
 
 # Command to request hours
 # flask student request-hours <student_id> <hours>
 
-@student_cli.command("request-hours", help="Submit a request to log volunteer hours.")
+@app.cli.command("request-hours", help="Submit a request to log volunteer hours.")
 @click.argument("student_id", type=int)
 @click.argument("hours", type=int)
 def request_hours_command(student_id, hours):
@@ -124,7 +124,7 @@ def request_hours_command(student_id, hours):
 # Command to view personal log (shows all hours requested/confirmed/denied for student)
 # flask student view-log <student_id>
 
-@student_cli.command("view-log", help="View all logged hours, including requested, confirmed, and denied requests.")
+@app.cli.command("view-log", help="View all logged hours, including requested, confirmed, and denied requests.")
 @click.argument("student_id", type=int)
 def view_student_requests_command(student_id):
 
@@ -149,7 +149,7 @@ def view_student_requests_command(student_id):
 # Command to view own accolades
 # flask student view-accolades <student_id>
 
-@student_cli.command("view-accolades", help="View all personal accolades earned.")
+@app.cli.command("view-accolades", help="View all personal accolades earned.")
 @click.argument("student_id", type=int)
 def view_accolades_command(student_id):
 
@@ -167,19 +167,19 @@ def view_accolades_command(student_id):
         print("Invalid student ID or no accolades found!")
 
         
-app.cli.add_command(student_cli)
+#app.cli.add_command(student_cli)
 
 
 
 """ ----------------- Staff Commands ----------------- """
 # Commands that can be used by staff only
 
-staff_cli = AppGroup('staff', help='Commands available to staff only.')
+#staff_cli = AppGroup('staff', help='Commands available to staff only.')
 
 # Command to log hours directly for a student (no previous request made)
 # flask staff log-hours <staff_id> <student_id> <hours>
 
-@staff_cli.command("log-hours", help="Log hours for a student directly.")
+@app.cli.command("log-hours", help="Log hours for a student directly.")
 @click.argument("staff_id", type=int)
 @click.argument("student_id", type=int)
 @click.argument("hours", type=int)
@@ -196,7 +196,7 @@ def log_hours_command(staff_id, student_id, hours):
 # Command to view all outstanding requests from students
 # flask staff view-all-requests
 
-@staff_cli.command("view-all-requests", help="View all outstanding student requests.")
+@app.cli.command("view-all-requests", help="View all outstanding student requests.")
 def view_all_requests_command():
 
     logs = get_pending_logs()
@@ -217,7 +217,7 @@ def view_all_requests_command():
 
 # Command to confirm hours for a student request
 # flask staff confirm-hours <staff_id> <log_id>
-@staff_cli.command("confirm-hours", help="Confirm a student's request for hours.")
+@app.cli.command("confirm-hours", help="Confirm a student's request for hours.")
 @click.argument("staff_id", type=int)
 @click.argument("log_id", type=int)
 def confirm_hours_command(staff_id, log_id):
@@ -232,7 +232,7 @@ def confirm_hours_command(staff_id, log_id):
 
 # Command to deny hours for a student request
 # flask staff deny-hours <staff_id> <log_id>
-@staff_cli.command("deny-hours", help="Deny a student's request for hours.")
+@app.cli.command("deny-hours", help="Deny a student's request for hours.")
 @click.argument("staff_id", type=int)
 @click.argument("log_id", type=int)
 def deny_hours_command(staff_id, log_id):
@@ -245,7 +245,7 @@ def deny_hours_command(staff_id, log_id):
         print("Invalid staff id or log id!")
 
 
-app.cli.add_command(staff_cli)
+#app.cli.add_command(staff_cli)
 
 
 
