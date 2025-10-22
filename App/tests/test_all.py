@@ -24,6 +24,7 @@ class UserUnitTests(unittest.TestCase):
     def test_new_user(self):
         user = User("bob", "bobpass", "student")
         assert user.username == "bob"
+        assert user.role == "student"
 
     def test_get_json(self):
         user = User("bob", "bobpass", "student")
@@ -44,6 +45,25 @@ class UserUnitTests(unittest.TestCase):
 
 class ModelUnitTests(unittest.TestCase):
 
+    def test_format_awarded_time(self):
+        acc = Accolade(student_id=1, milestone=10, awarded_at=datetime(2025, 10, 17, 14, 30))
+        formatted = acc.format_awarded_time()
+        assert formatted == "2025-10-17 14:30"
+
+    def test_milestone_name(self):
+        acc = Accolade(student_id=1, milestone=10)
+        assert acc.milestone_name() == "Bronze"
+    
+    def test_format_created_time(self):
+        log = HourLog(student_id=1, staff_id=2, hours=5, status="requested", created_at=datetime(2025, 10, 17, 9, 45), reviewed_at=datetime.utcnow)
+        formatted = log.format_created_time()
+        assert formatted == "2025-10-17 09:45"
+
+    def test_format_reviewed_time(self):
+        log = HourLog(student_id=1, staff_id=2, hours=5, status="requested", created_at=datetime.utcnow(), reviewed_at=datetime(2025, 10, 17, 16, 20))
+        formatted = log.format_reviewed_time()
+        assert formatted == "2025-10-17 16:20"
+    '''
     def test_new_user_object(self):
         u = User(username="bob", password="bobpass", role="student")
         assert u.username == "bob"
@@ -90,7 +110,8 @@ class ModelUnitTests(unittest.TestCase):
         assert a10.milestone_name() in ("Bronze", "10 hours")
         a50 = Accolade(student_id=1, milestone=50)
         assert a50.milestone_name() in ("Gold", "50 hours")
-
+    '''
+    
 '''
     Integration Tests
 '''
