@@ -47,7 +47,7 @@ def student_logs():
         'status': log.status,
         'confirmed_by' :staff_name,
         'created_at' : log.format_created_time(),
-        'reviewed_at': log.format_reviwed_time()
+        'reviewed_at': log.format_reviewed_time()
 
     } for log in logs]), 200
 

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash, redirect, url_for
 from flask_jwt_extended import get_jwt_identity, jwt_required, current_user as jwt_current_user
 
-from App.controllers.staff import get_pending_logs, confirm_hours, deny_hours, get_staff
+from App.controllers.staff import get_pending_logs, confirm_hours, deny_hours, get_staff, log_hours
 
 
 staff_views = Blueprint('staff_views', __name__, template_folder='../templates')
@@ -29,7 +29,7 @@ def pending_logs():
 
 @staff_views.route('/staff/log_hours', methods=['POST'])
 @jwt_required()
-def log_hours():
+def log_student_hours():
     staff_id = get_jwt_identity()
     staff = get_staff(staff_id)
 
