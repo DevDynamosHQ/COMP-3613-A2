@@ -1,4 +1,5 @@
 from App.controllers.staff import log_hours
+from App.controllers.student import request_hours
 from .user import create_user
 from App.database import db
 
