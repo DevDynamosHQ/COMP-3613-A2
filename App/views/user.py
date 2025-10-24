@@ -21,6 +21,14 @@ def leaderboard_page():
 
 
 
+
+
+
+
+
+
+
+
 @user_views.route('/users', methods=['GET'])
 def get_user_page():
     users = get_all_users()
@@ -48,16 +56,3 @@ def create_user_endpoint():
 def static_user_page():
   return send_from_directory('static', 'static-user.html')
 
-@user_views.route('/signup', methods = ['POST'])
-def signup():
-    data = request.json
-    
-    if not data or not 'username' in data or not 'password' in data or not 'role' in data:
-        return jsonify({'message': 'Missing data required'}), 400
-    
-    user = create_user(data['username'], data['password'], data['role'])
-
-    if not user:
-        return jsonify({'message': 'User already exists'}), 409 
-    
-    return jsonify({'message': f'User {user.username} created successfully'}), 201
