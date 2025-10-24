@@ -39,5 +39,11 @@ def initialize():
     log_hours (14, 8, 16) # staff ID 14 is laura, student ID 8 is heidi
     log_hours (15, 9, 22) # staff ID 15 is mike, student ID 9 is ivan 
 
-
+    request_hours (1,10)
+    request_hours (2,10)
+    request_hours (3,10)
+    request_hours (4,10)
+    request_hours (5,10)
+    request_hours (6,10)
+    request_hours (6, 5)
    
